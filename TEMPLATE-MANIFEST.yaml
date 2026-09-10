@@ -22,6 +22,7 @@ contents:
     - LICENSE
     - CHANGELOG.md
     - .gitignore
+    - .github/workflows/template.yml
     - .agent/
     - configuration/
     - skills/

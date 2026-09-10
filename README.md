@@ -40,9 +40,9 @@ The first executable milestone bootstraps and inspects project state. Planning,
 work execution, and verification commands remain documented design targets.
 
 `aic init` creates a non-destructive `.agent` directory containing the tracked
-project, execution, policy, and agent-contract files. Existing files are
-preserved. `aic stack` writes the detected repository stack to
-`.agent/stack.yaml`.
+project, state, decisions, work, verification, skills, utilities, and root
+repository guidance files. Existing files are preserved. `aic stack` writes
+the detected repository stack to `.agent/stack.yaml`.
 
 Autonomous mode:
 
@@ -67,10 +67,19 @@ AI proposes. Deterministic tools inspect and execute. Evidence establishes truth
 - `docs/09-data-model.md` — persistent entities and relationships
 - `docs/10-implementation-roadmap.md` — phased engineering plan
 - `schemas/*.yaml` — example machine-readable state schemas
-- `templates/AGENT.md` — starter agent contract
-- `templates/*.yaml` — starter project configuration and policy
+- `AGENT.md` — starter agent contract
+- `.agent/` — structured control-plane state and decisions
+- `configuration/` — project and workflow configuration
+- `skills/` — reusable agent operating procedures
+- `utils/` — reserved deterministic checks, generators, and scripts
+- `TEMPLATE-MANIFEST.yaml` — template contents and compatibility contract
 - `examples/*` — example roadmap, plan, work item and verification
 - `src/main.rs` — initial Rust CLI implementation
+
+The repository itself is the canonical AIC Engineering Init starter template.
+The Rust CLI implementation lives alongside the template and materializes only
+the template-owned files when `aic init` runs; it does not copy source code,
+documentation, examples, schemas, or build output into a target project.
 
 ## Runtime
 
@@ -83,4 +92,13 @@ cargo run -- init
 
 Persisted work items use `WI-###` identifiers. The user-facing `todo` command
 is reserved for the work-management milestone.
+
+## Repository conventions
+
+- `configuration/` contains user-facing project and workflow configuration.
+- `.agent/` contains structured state, decisions, plans, work items, and
+  verification records.
+- `skills/` contains reusable agent operating procedures.
+- `utils/` is reserved for deterministic checks, generators, and scripts.
+- Local caches, logs, sessions, build output, and secrets are ignored.
 

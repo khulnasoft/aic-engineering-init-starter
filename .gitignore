@@ -4,4 +4,12 @@ target/
 .agent/cache/
 .agent/logs/
 .agent/sessions/
-target/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.idea/
+.vscode/

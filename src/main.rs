@@ -5,7 +5,28 @@ use serde::Deserialize;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-static TEMPLATE_ROOT: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/aic-engineering-init-starter");
+static AGENT_TEMPLATE: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/.agent");
+static CONFIGURATION_TEMPLATE: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/configuration");
+static SKILLS_TEMPLATE: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/skills");
+static UTILS_TEMPLATE: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/utils");
+
+const ROOT_TEMPLATE_FILES: &[(&str, &str)] = &[
+    (".gitignore", include_str!("../.gitignore")),
+    ("AGENT.md", include_str!("../AGENT.md")),
+    ("CHANGELOG.md", include_str!("../CHANGELOG.md")),
+    ("CONTRIBUTING.md", include_str!("../CONTRIBUTING.md")),
+    ("LICENSE", include_str!("../LICENSE")),
+    ("README.md", include_str!("../README.md")),
+    ("SECURITY.md", include_str!("../SECURITY.md")),
+    (
+        "TEMPLATE-MANIFEST.yaml",
+        include_str!("../TEMPLATE-MANIFEST.yaml"),
+    ),
+    (
+        ".github/workflows/template.yml",
+        include_str!("../.github/workflows/template.yml"),
+    ),
+];
 
 #[derive(Debug, Parser)]
 #[command(name = "aic", version, about = "AI-native engineering control plane")]
@@ -43,35 +64,47 @@ fn main() -> Result<()> {
 }
 
 fn init(root: &Path) -> Result<()> {
-    materialize_directory(&TEMPLATE_ROOT, root)?;
+    for (path, contents) in ROOT_TEMPLATE_FILES {
+        materialize_file(root, Path::new(path), contents.as_bytes())?;
+    }
+    materialize_directory(&AGENT_TEMPLATE, root, Path::new(".agent"))?;
+    materialize_directory(&CONFIGURATION_TEMPLATE, root, Path::new("configuration"))?;
+    materialize_directory(&SKILLS_TEMPLATE, root, Path::new("skills"))?;
+    materialize_directory(&UTILS_TEMPLATE, root, Path::new("utils"))?;
     Ok(())
 }
 
-fn materialize_directory(directory: &Dir<'_>, root: &Path) -> Result<()> {
+fn materialize_directory(directory: &Dir<'_>, root: &Path, destination: &Path) -> Result<()> {
     for file in directory.files() {
-        let target = root.join(file.path());
-        if file.path().to_string_lossy().ends_with("/.DS_Store")
-            || file.path() == Path::new(".DS_Store")
-        {
-            continue;
-        }
-        if let Some(parent) = target.parent() {
-            fs::create_dir_all(parent)
-                .with_context(|| format!("create {}", display_path(parent).display()))?;
-        }
-        if target.exists() {
-            println!("skip {} (already exists)", display_path(&target).display());
-            continue;
-        }
-        fs::write(&target, file.contents())
-            .with_context(|| format!("write {}", display_path(&target).display()))?;
-        println!("create {}", display_path(&target).display());
+        materialize_file(root, &destination.join(file.path()), file.contents())?;
     }
 
     for child in directory.dirs() {
-        materialize_directory(child, root)?;
+        materialize_directory(child, root, destination)?;
     }
 
+    Ok(())
+}
+
+fn materialize_file(root: &Path, relative_path: &Path, contents: &[u8]) -> Result<()> {
+    if relative_path
+        .components()
+        .any(|component| component.as_os_str() == ".DS_Store")
+    {
+        return Ok(());
+    }
+    let target = root.join(relative_path);
+    if let Some(parent) = target.parent() {
+        fs::create_dir_all(parent)
+            .with_context(|| format!("create {}", display_path(parent).display()))?;
+    }
+    if target.exists() {
+        println!("skip {} (already exists)", display_path(&target).display());
+        return Ok(());
+    }
+    fs::write(&target, contents)
+        .with_context(|| format!("write {}", display_path(&target).display()))?;
+    println!("create {}", display_path(&target).display());
     Ok(())
 }
 
@@ -307,6 +340,25 @@ mod tests {
             .join("configuration/workflow.yaml")
             .exists());
         assert!(directory.path().join("skills/coding/SKILL.md").exists());
+        assert!(directory
+            .path()
+            .join(".github/workflows/template.yml")
+            .exists());
+        assert!(!directory.path().join("Cargo.toml").exists());
+        assert!(!directory.path().join("src/main.rs").exists());
+        assert!(!directory.path().join("docs").exists());
+        assert!(!directory.path().join("examples").exists());
+        assert!(!directory.path().join("schemas").exists());
+        assert!(!directory.path().join("target").exists());
+
+        let generated_agent = fs::read_to_string(directory.path().join("AGENT.md"))
+            .expect("generated agent contract");
+        init(directory.path()).expect("initialize project again");
+        assert_eq!(
+            fs::read_to_string(directory.path().join("AGENT.md"))
+                .expect("generated agent contract after second init"),
+            generated_agent
+        );
     }
 
     #[test]
