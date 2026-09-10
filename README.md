@@ -36,6 +36,11 @@ aic stack
 aic status
 ```
 
+Running `aic init` opens an interactive project setup wizard for the project
+name, stack, AI workflow features, provider, and model. API keys are read from
+environment variables and are never persisted. Use `aic init --non-interactive`
+to bootstrap the starter defaults in scripts and CI.
+
 The first executable milestone bootstraps and inspects project state. Planning,
 work execution, and verification commands remain documented design targets.
 
