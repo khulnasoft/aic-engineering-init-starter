@@ -1,0 +1,18 @@
+version: 1
+id: WI-001
+type: foundation
+title: Initialize AIC Engineering Control Plane
+status: pending
+priority: high
+acceptance:
+  - .agent control plane exists
+  - canonical work-item prefix is WI
+  - TODO prefix resolves as a CLI alias
+verification:
+  - type: file_exists
+    path: .agent/project.yaml
+  - type: file_exists
+    path: AGENT.md
+
+notes:
+  - Verification is pending until the CLI alias behavior has executable evidence.

@@ -1,0 +1,21 @@
+version: 1
+
+phase: bootstrap
+health: unknown
+
+roadmap:
+  completed: 0
+  total: 0
+
+work:
+  pending: 0
+  active: 0
+  verified: 0
+
+verification:
+  score: 0
+
+context:
+  status: not_initialized
+
+last_checkpoint: null

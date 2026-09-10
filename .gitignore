@@ -1,0 +1,7 @@
+.DS_Store
+*.log
+target/
+.agent/cache/
+.agent/logs/
+.agent/sessions/
+target/

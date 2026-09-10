@@ -1,0 +1,11 @@
+version: 1
+id: ADR-001
+title: Canonical work-item identity
+status: accepted
+decision:
+  canonical: WI-###
+  cli_aliases:
+    - TODO-###
+consequence:
+  storage: Persist WI-###
+  cli: Accept TODO-### and normalize to WI-###

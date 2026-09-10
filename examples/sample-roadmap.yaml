@@ -1,0 +1,14 @@
+version: 1
+milestones:
+  - id: M001
+    title: Foundation
+    status: completed
+    dependencies: []
+  - id: M002
+    title: Core Domain
+    status: pending
+    dependencies: [M001]
+  - id: M003
+    title: API
+    status: pending
+    dependencies: [M002]

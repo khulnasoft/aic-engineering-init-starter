@@ -1,0 +1,21 @@
+version: 1
+milestone: M1
+status: pending
+checks:
+  - id: V-001
+    claim: canonical work-item identifier is WI-###
+    evidence:
+      - .agent/project.yaml
+      - .agent/decisions/ADR-001-work-item-identity.yaml
+  - id: V-002
+    claim: TODO-### is CLI alias only
+    evidence:
+      - AGENT.md
+      - .agent/project.yaml
+    status: pending
+    note: Requires executable CLI alias normalization evidence.
+  - id: V-003
+    claim: autonomous execution remains out of scope
+    evidence:
+      - .agent/project.yaml
+      - .agent/roadmap/roadmap.yaml

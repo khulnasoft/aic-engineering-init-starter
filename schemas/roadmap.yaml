@@ -1,0 +1,6 @@
+version: 1
+milestones:
+  - id: M001
+    title: Foundation
+    status: pending
+    dependencies: []

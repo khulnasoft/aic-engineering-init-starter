@@ -1,0 +1,22 @@
+version: 1
+
+project:
+  name: example-project
+  type: application
+
+stack:
+  language: typescript
+  runtime: node
+  framework: nextjs
+  package_manager: pnpm
+
+ai:
+  provider: openai
+  model: gpt-5.6
+
+workflow:
+  roadmap: true
+  planning: true
+  context: true
+  todo: true
+  verification: true

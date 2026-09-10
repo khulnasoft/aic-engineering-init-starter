@@ -1,0 +1,10 @@
+version: 1
+id: ADR-002
+title: AIC CLI runtime
+status: accepted
+decision:
+  runtime: rust
+scope:
+  milestone: M1
+consequence:
+  template: Project templates remain runtime-neutral unless the project explicitly declares a runtime.

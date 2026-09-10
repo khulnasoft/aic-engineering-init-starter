@@ -1,0 +1,17 @@
+version: 1
+id: VER-023
+subject: WI-023
+result: verified
+confidence: high
+evidence:
+  - type: file_exists
+    path: src/auth/session.ts
+    result: pass
+  - type: command
+    command: pnpm test
+    result: pass
+  - type: command
+    command: pnpm typecheck
+    result: pass
+  - type: security_check
+    result: pass

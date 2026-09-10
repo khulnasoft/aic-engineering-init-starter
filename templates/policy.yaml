@@ -1,0 +1,12 @@
+version: 1
+
+policy:
+  dependency_install:
+    require_approval: true
+  destructive_commands:
+    require_approval: true
+  production_files:
+    read: allowed
+    write: approval
+  database_migrations:
+    verification_required: true

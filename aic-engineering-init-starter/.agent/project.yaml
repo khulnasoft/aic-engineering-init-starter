@@ -1,0 +1,28 @@
+version: 1
+
+project:
+  name: ""
+  type: "application"
+
+stack:
+  language: unknown
+  runtime: unknown
+  framework: unknown
+  package_manager: unknown
+
+runtime:
+  declared: false
+  value: null
+
+workflow:
+  roadmap: true
+  planning: true
+  context: true
+  todo: true
+  verification: true
+  autonomous_execution: false
+
+work_items:
+  canonical_prefix: WI
+  cli_alias_prefixes:
+    - TODO

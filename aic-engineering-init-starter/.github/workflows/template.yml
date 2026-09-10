@@ -1,0 +1,30 @@
+name: Template validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate YAML
+        run: |
+          ruby -e 'require "yaml"; Dir["**/*.{yml,yaml}"].sort.each { |path| YAML.load_file(path); puts "ok #{path}" }'
+      - name: Reject credential files
+        run: |
+          test ! -e .env
+          test ! -e .env.local
+          ! find . -type f \( -name '*.pem' -o -name '*.key' \) -print -quit | grep -q .
+      - name: Check required template files
+        run: |
+          test -f TEMPLATE-MANIFEST.yaml
+          test -f AGENT.md
+          test -f .agent/project.yaml
+          test -f .agent/state.yaml
+          test -f configuration/workflow.yaml

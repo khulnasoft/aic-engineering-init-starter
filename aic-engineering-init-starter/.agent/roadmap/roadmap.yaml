@@ -1,0 +1,12 @@
+version: 1
+milestones:
+  - id: M1
+    title: Engineering Control Plane Starter
+    status: active
+    scope:
+      - init
+      - project state
+      - work-item identity
+    out_of_scope:
+      - autonomous execution
+      - code generation runtime

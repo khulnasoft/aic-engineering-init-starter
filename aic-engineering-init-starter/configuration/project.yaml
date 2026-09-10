@@ -1,0 +1,12 @@
+version: 1
+
+project:
+  name: ""
+  runtime: null
+  framework: null
+  package_manager: null
+
+ai:
+  provider: null
+  model: null
+  endpoint: null

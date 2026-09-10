@@ -1,0 +1,57 @@
+AIC ENGINEERING CONTROL PLANE
+
+        USER IDEA
+            |
+            v
+      REQUIREMENTS
+            |
+            v
+         ROADMAP
+            |
+            v
+      ARCHITECTURE
+            |
+            v
+           PLAN
+            |
+   +--------+--------+--------+
+   |        |        |        |
+ STACK   CONTEXT   SKILLS  DECISIONS
+   |        |        |        |
+   +--------+--------+--------+
+            |
+            v
+        SCAFFOLD
+            |
+            v
+       WORK ITEMS
+            |
+            v
+           WORK
+            |
+            v
+        IMPLEMENT
+            |
+            v
+          TEST
+            |
+            v
+         REVIEW
+            |
+            v
+        SECURITY
+            |
+            v
+         VERIFY
+            |
+            v
+        CHECKPOINT
+            |
+            v
+          LEARN
+            |
+            v
+       PROJECT MEMORY
+            |
+            v
+       NEXT ITERATION

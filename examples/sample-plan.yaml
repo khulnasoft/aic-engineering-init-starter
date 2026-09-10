@@ -1,0 +1,18 @@
+version: 1
+id: PLAN-001
+milestone: M002
+title: Build core domain
+changes:
+  - src/domain/user.ts
+  - src/domain/project.ts
+tasks:
+  - Create User entity
+  - Create Project entity
+  - Add validation
+  - Add unit tests
+acceptance:
+  - User can be created
+  - Invalid input rejected
+verification:
+  - typecheck
+  - unit_test

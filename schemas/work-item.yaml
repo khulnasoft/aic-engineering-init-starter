@@ -1,0 +1,11 @@
+version: 1
+id: WI-001
+type: feature
+title: Example work item
+status: pending
+priority: medium
+requirements: []
+plan: []
+files: []
+acceptance: []
+verification: []

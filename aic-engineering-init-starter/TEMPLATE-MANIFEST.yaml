@@ -1,0 +1,40 @@
+version: 1
+name: aic-engineering-init-starter
+kind: project-template
+
+schema:
+  project: 1
+  state: 1
+  workflow: 1
+
+compatibility:
+  cli_runtime: rust
+  minimum_aic_version: 0.1.0
+
+contents:
+  source_root: .
+  destination_root: .
+  tracked:
+    - AGENT.md
+    - README.md
+    - CONTRIBUTING.md
+    - SECURITY.md
+    - LICENSE
+    - CHANGELOG.md
+    - .gitignore
+    - .agent/
+    - configuration/
+    - skills/
+    - utils/
+  local_only:
+    - .agent/cache/
+    - .agent/logs/
+    - .agent/sessions/local/
+
+m1:
+  work_item:
+    canonical: WI-###
+    cli_alias: TODO-###
+  cli_runtime: rust
+  autonomous_execution: false
+  runtime_neutral_project_template: true

@@ -1,0 +1,6 @@
+version: 1
+id: REQ-001
+title: Example requirement
+priority: medium
+acceptance: []
+verification: []

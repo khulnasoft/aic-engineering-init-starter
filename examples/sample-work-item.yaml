@@ -1,0 +1,20 @@
+version: 1
+id: WI-023
+type: feature
+title: Add authentication session repository
+status: pending
+priority: high
+requirements:
+  - REQ-014
+plan:
+  - PLAN-009
+files:
+  - src/auth/session.ts
+acceptance:
+  - session can be created
+  - session can be revoked
+  - expiry enforced
+verification:
+  - typecheck
+  - unit_test
+  - integration_test

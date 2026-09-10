@@ -1,0 +1,9 @@
+version: 1
+
+execution:
+  max_iterations: 20
+  require_clean_tests: true
+  require_verification: true
+  stop_on_security_issue: true
+  stop_on_architecture_violation: true
+  stop_on_ambiguous_requirement: true

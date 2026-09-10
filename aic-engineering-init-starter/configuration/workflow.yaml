@@ -1,0 +1,7 @@
+version: 1
+
+workflow:
+  require_context_before_plan: true
+  require_plan_before_scaffold: true
+  require_evidence_for_verification: true
+  autonomous_execution: false
